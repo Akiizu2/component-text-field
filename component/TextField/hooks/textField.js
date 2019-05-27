@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Animated, Easing } from 'react-native'
 
 const FIELD_STATE = {
@@ -29,25 +29,15 @@ function useFieldAnimate(props) {
     return () => { }
   }, [fieldState])
 
-  const labelPositionY = fieldAnimate.interpolate({
+  const interpolater = (outputRange) => fieldAnimate.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, 18],
+    outputRange,
   })
 
-  const labelPositionX = fieldAnimate.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, 8],
-  })
-
-  const labelScale = fieldAnimate.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0.84, 1],
-  })
-
-  const borderBottomAnimatedeSize = fieldAnimate.interpolate({
-    inputRange: [0, 1],
-    outputRange: [3, 2],
-  })
+  const labelPositionY = interpolater([0, 8])
+  const labelPositionX = interpolater([4, 8])
+  const labelScale = interpolater([0.84, 1])
+  const borderBottomAnimatedeSize = interpolater([2, 1])
 
   const labelAnimatedStyleWrapper = {
     top: labelPositionY,

@@ -12,15 +12,18 @@ import { textFieldStyles as styles } from './stylesheets'
 const { FIELD_STATE, useFieldAnimate } = hooks
 
 function TextField(props) {
+
   const {
     label,
-    value: intialValue,
-    containerStyle,
-    labelTextStyle,
     color,
-    helperText,
     disabled,
+    containerStyle,
+    helperText,
+    labelTextStyle,
+    helperTextStyle,
+    value: intialValue,
   } = props
+
   const [fieldState, setFieldState] = useState(FIELD_STATE.BLUR)
   const [value, setValue] = useState(intialValue)
 
@@ -34,7 +37,10 @@ function TextField(props) {
     <View style={styles.container}>
       <Animated.View
         pointerEvents="none"
-        style={[styles.labelWrapper, labelAnimatedStyleWrapper]}
+        style={[
+          styles.labelWrapper,
+          labelAnimatedStyleWrapper
+        ]}
       >
         <Animated.Text style={[
           labelAnimatedStyle,
@@ -68,7 +74,8 @@ function TextField(props) {
             styles.helperText,
             disabled
               ? styles.disabledLabel
-              : { color }
+              : { color },
+            helperTextStyle,
           ]}>{helperText}</Text>
         </View>
       }
@@ -79,14 +86,14 @@ function TextField(props) {
 TextField.defaultProps = {
   trailingIcon() { },
   helperText() { },
-  label: 'Username',
+  label: 'Label',
   value: '',
-  disabled: true,
+  disabled: false,
   helperText: '',
   containerStyle: {},
   labelTextStyle: {},
+  helperTextStyle: {},
   color: '#333',
-
 }
 
 export default memo(TextField)
