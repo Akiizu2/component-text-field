@@ -22,6 +22,7 @@ function TextField(props) {
     labelTextStyle,
     helperTextStyle,
     value: intialValue,
+    secureTextEntry,
   } = props
 
   const [fieldState, setFieldState] = useState(FIELD_STATE.BLUR)
@@ -54,6 +55,7 @@ function TextField(props) {
         onBlur={() => setFieldState(FIELD_STATE.BLUR)}
         onChangeText={setValue}
         style={[styles.textFieldContainer, containerStyle]}
+        secureTextEntry={secureTextEntry}
       />
       <Animated.View
         pointerEvents="none"
@@ -89,6 +91,7 @@ TextField.defaultProps = {
   label: 'Label',
   value: '',
   disabled: false,
+  secureTextEntry: false,
   helperText: '',
   containerStyle: {},
   labelTextStyle: {},
